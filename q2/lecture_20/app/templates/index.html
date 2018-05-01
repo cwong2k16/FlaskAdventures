@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if logged_in %}
+    <div>
+        <h1>Welcome to my Web Calculator</h1>
+        <p>First number:</p>
+        <input></input>
+        <p>Second number:</p>
+        <input></input>
+    </div>
+    {% else %}
+    You need to login to see the content! 
+    {% endif %}
+
+
+{% endblock %}
