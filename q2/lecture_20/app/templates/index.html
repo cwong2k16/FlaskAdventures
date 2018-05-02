@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
     <div>
-        <h1>Welcome to my Web Calculator</h1>
-        <p>First number:</p>
-        <input></input>
-        <p>Second number:</p>
-        <input></input>
+        <div style="text-align:center">
+            <h1>Welcome to Web Calculator</h1>
+            {{ form.number.label }}<br>
+            {{ form.number(size=32) }}<br>
+            {{ form.number2.label}}<br>
+            {{ form.number2(size=32) }}<br>
+            {{ form.operator.label}}<br>
+        </div>
+        <div style="margin-left:45%">
+            <p>
+            {{form.operator()}}
+            </p>
+        </div>
+        <div style="text-align:center">
+            {{ form.submit()}}<br>
+        </div>
     </div>
-
+</form>
 
 {% endblock %}

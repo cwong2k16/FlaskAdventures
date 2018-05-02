@@ -1,14 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField, RadioField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from app.models import User
 
 
 class SubmissionForm(FlaskForm):
-    number = FloatField('First Number:', validators=[DataRequired()])
-    number2 = FloatField('Second Number:', validators=[DataRequired()])
-    operator = RadioField('Operator:', choices =[('choice1', 'Add'), ('choice2','Subtract'),
-                                                  ('choice3', 'Multiply'), ('choice4', 'Divide')])
+    title = StringField('Title', validators=[DataRequired()])
+    text = TextAreaField('Text', validators=[DataRequired()])
     submit = SubmitField('Submit Entry')
 
 
