@@ -39,3 +39,15 @@ def result(selectedValue):
         result=result[:-2]
 
     return render_template('success.html', title='Result', result=result)
+
+@app.errorhandler(403)
+def not_found_error(error):
+    return render_template('403.html'), 403
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def not_found_error(error):
+    return render_template('500.html'), 500
