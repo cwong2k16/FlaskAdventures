@@ -6,6 +6,7 @@ root = Tk()
 root.geometry("300x500")
 root.title("CSE 337 Drawing Program")
 canvas = Canvas(root)
+v = IntVar()
 
 def buttonPressed(evt): 
    if evt.widget == canvas:
@@ -21,9 +22,9 @@ e2 = Entry(root, width=width)
 e3 = Entry(root, width=width)
 e4 = Entry(root, width=width)
 
-radio1 = Radiobutton(root,text="Rectangle",variable=1,value=1)
-radio2 = Radiobutton(root,text="Line",variable=1,value=2)
-radio3 = Radiobutton(root,text="Oval",variable=1,value=3)
+radio1 = Radiobutton(root,text="Rectangle",variable=v,value=1)
+radio2 = Radiobutton(root,text="Line",variable=v,value=2)
+radio3 = Radiobutton(root,text="Oval",variable=v,value=3)
 
 label1.grid(row=25, column=0)
 label2.grid(row=26, column=0)
