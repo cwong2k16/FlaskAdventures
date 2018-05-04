@@ -1,5 +1,5 @@
 import shelve
-from Tkinter import *
+from tkinter import *
 
 data = shelve.open("database")
 root = Tk()
