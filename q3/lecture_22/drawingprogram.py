@@ -37,8 +37,8 @@ e3.grid(row=27, column=1)
 e4.grid(row=28, column=1)
 
 radio1.grid(row=29, column=0)
-radio2.grid(row=30, column=0)
-radio3.grid(row=31, column=0)
+radio2.grid(row=30, column=0, sticky='w')
+radio3.grid(row=31, column=0, sticky='w')
 
 canvas.grid(row=0, rowspan=25, column=0, columnspan=25)
 
