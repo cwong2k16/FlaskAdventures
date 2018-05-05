@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 root = Tk()
 root.geometry("300x500")
@@ -13,6 +14,7 @@ def buttonPressed(evt):
       global param2
       global param3
       global param4
+      global width
       param1 = e1.get()
       param2 = e2.get()
       param3 = e3.get()
@@ -20,13 +22,16 @@ def buttonPressed(evt):
       width = e5.get()
       if len(width)==0:
             width=1
-      if evt.widget == canvas:
-            if(shape == 1):
-                  canvas.create_rectangle(param1, param2, param3, param4, width=width, fill=color, outline=color)
-            elif(shape == 2):
-                  canvas.create_line(param1, param2, param3, param4, width=width, fill=color)
+      if evt.widget == canvas:  
+            if errorHandler() == 1:
+                  return
             else:
-                  canvas.create_oval(param1, param2, param3, param4, width=width, fill=color, outline=color)
+                  if(shape == 1):
+                        canvas.create_rectangle(param1, param2, param3, param4, width=width, fill=color, outline=color)
+                  elif(shape == 2):
+                        canvas.create_line(param1, param2, param3, param4, width=width, fill=color)
+                  else:
+                        canvas.create_oval(param1, param2, param3, param4, width=width, fill=color, outline=color)
             
 def doShape():
       global shape
@@ -36,19 +41,32 @@ def doColor():
       global color
       if(x.get() == 4):
             color = "red"
-            print(color)
       elif(x.get() ==5):
             color = "green"
-            print(color)
       else:
             color = "blue"
-            print(color)
 
 def errorHandler():
-      if param1 < 0:
-            print("")
-      elif param2 < 0:
-            print("")
+      x = 0
+      if len(param1) == 0 or float(param1) < 0 or float(param1) > canvas.winfo_width():
+            messagebox.showinfo("Invalid Parameter", "Parameter 1 is invalid")
+            x = 1
+      if len(param2) == 0 or float(param2) < 0 or float(param2) > canvas.winfo_height():
+            messagebox.showinfo("Invalid Parameter", "Parameter 2 is invalid")
+            x = 1
+      if len(param3) == 0 or float(param3) < 0 or float(param3) > canvas.winfo_width():
+            messagebox.showinfo("Invalid Parameter", "Parameter 3 is invalid")
+            x = 1
+      if len(param4) == 0 or float(param4) < 0 or float(param4) > canvas.winfo_height():
+            messagebox.showinfo("Invalid Parameter", "Parameter 4 is invalid")
+            x = 1
+      if float(width) < 0:
+            messagebox.showinfo("Invalid width size")
+            x = 1
+      return x
+
+def errorHandlerHelper(param, widthOrHeight):
+
 
 label1 = Label(root, text="Param 1")
 label2 = Label(root, text="Param 2")
@@ -74,6 +92,7 @@ label1.grid(row=25, column=0)
 label2.grid(row=26, column=0)
 label3.grid(row=27, column=0)
 label4.grid(row=28, column=0)
+label5.grid(row=29, column=0)
 
 e1.grid(row=25, column=1)
 e2.grid(row=26, column=1)
