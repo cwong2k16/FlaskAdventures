@@ -8,6 +8,8 @@ canvas = Canvas(root)
 v = IntVar()
 x = IntVar()
 color = "black"
+shape = 0
+array = []
 
 def buttonPressed(evt):
       global param1
@@ -26,13 +28,20 @@ def buttonPressed(evt):
             if errorHandler() == 1:
                   return
             else:
-                  if(shape == 1):
-                        canvas.create_rectangle(param1, param2, param3, param4, width=width, fill=color, outline=color)
+                  if shape not in (1, 2, 3):
+                        messagebox.showinfo("No radio option selected", "No radio button was selected.")
+                        return
+                  elif(shape == 1):
+                        array.append(canvas.create_rectangle(param1, param2, param3, param4, width=width, fill=color, outline=color))
                   elif(shape == 2):
-                        canvas.create_line(param1, param2, param3, param4, width=width, fill=color)
+                        array.append(canvas.create_line(param1, param2, param3, param4, width=width, fill=color))
                   else:
-                        canvas.create_oval(param1, param2, param3, param4, width=width, fill=color, outline=color)
-            
+                        array.append(canvas.create_oval(param1, param2, param3, param4, width=width, fill=color, outline=color))
+
+def deleteShape():
+      if(len(array)>0):
+            canvas.delete(array.pop())
+
 def doShape():
       global shape
       shape = v.get()
@@ -47,17 +56,18 @@ def doColor():
             color = "blue"
 
 def errorHandler():
+      print(array)
       x = 0
-      if len(param1) == 0 or float(param1) < 0 or float(param1) > canvas.winfo_width():
+      if errorHandlerHelper(param1, "width"):
             messagebox.showinfo("Invalid Parameter", "Parameter 1 is invalid")
             x = 1
-      if len(param2) == 0 or float(param2) < 0 or float(param2) > canvas.winfo_height():
+      if errorHandlerHelper(param2, "height"):
             messagebox.showinfo("Invalid Parameter", "Parameter 2 is invalid")
             x = 1
-      if len(param3) == 0 or float(param3) < 0 or float(param3) > canvas.winfo_width():
+      if errorHandlerHelper(param3, "width"):
             messagebox.showinfo("Invalid Parameter", "Parameter 3 is invalid")
             x = 1
-      if len(param4) == 0 or float(param4) < 0 or float(param4) > canvas.winfo_height():
+      if errorHandlerHelper(param4, "height"):
             messagebox.showinfo("Invalid Parameter", "Parameter 4 is invalid")
             x = 1
       if float(width) < 0:
@@ -66,7 +76,17 @@ def errorHandler():
       return x
 
 def errorHandlerHelper(param, widthOrHeight):
+      if widthOrHeight == "width":
+            return is_number(param) == False or len(param) == 0 or float(param) < 0 or float(param) > canvas.winfo_width()
+      else:
+            return is_number(param) == False or len(param) == 0 or float(param) < 0 or float(param) > canvas.winfo_height()
 
+def is_number(number):
+      try:
+            float(number)
+      except ValueError:
+            return False
+      return True
 
 label1 = Label(root, text="Param 1")
 label2 = Label(root, text="Param 2")
@@ -107,6 +127,10 @@ radio3.grid(row=32, column=0, sticky='w')
 radio4.grid(row=30, column=1, sticky='w')
 radio5.grid(row=31, column=1, sticky='w')
 radio6.grid(row=32, column=1, sticky='w')
+
+delete = Button(root, text="Delete", command=deleteShape)
+
+delete.grid(row=33, column = 0, sticky='w')
 
 canvas.grid(row=0, rowspan=25, column=0, columnspan=25)
 
