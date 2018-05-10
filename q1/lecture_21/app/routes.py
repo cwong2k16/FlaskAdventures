@@ -29,15 +29,15 @@ def showpost(postid):
 def editpage(postid):
     curr_post = Post.query.filter_by(id=postid)[0]
     if current_user.is_authenticated:
-        #print(current_user)
-        form = EditForm()
-        form.text_2.data = curr_post.body
-        if form.validate_on_submit():
-            flash('Topic has been submitted.')
-            curr_post.body = form.text_2.data
-            db.session.commit()
-            return redirect(url_for('index'))
-        return render_template('edit.html',  title='Edit New Entry', form=form)
+            form = EditForm()
+            if request.method == 'POST':
+                flash('Topic has been submitted.')
+                curr_post.body = form.text_2.data
+                db.session.commit()
+                return redirect(url_for('index'))
+            else:
+                form.text_2.data = curr_post.body
+                return render_template('edit.html',  title='Edit New Entry', form=form)
     return render_template('notloggedin.html')
 
 
