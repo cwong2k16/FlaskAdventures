@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>User: {{ user.username }}</h1>
+    <hr>
+    Posts authored by this user: <br>
+    {% for post in posts %}
+    <p>
+    <b><a href="/posts/{{post.id}}">{{ post.title }}</a> at  {{post.timestamp}}</b>
+    </p>
+    {% endfor %}
+{% endblock %}

@@ -56,7 +56,6 @@ def doColor():
             color = "blue"
 
 def errorHandler():
-      print(array)
       x = 0
       if errorHandlerHelper(param1, "width"):
             messagebox.showinfo("Invalid Parameter", "Parameter 1 is invalid")
