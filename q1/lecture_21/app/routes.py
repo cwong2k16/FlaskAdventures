@@ -19,7 +19,7 @@ def showpost(postid):
     if current_user.is_authenticated:
         current_post = Post.query.filter_by(id=postid)[0]
         author = current_post.author #User.query.filter_by(id=current_post.user_id).first_or_404()
-        return render_template('showpost.html', title='Show Post', post=current_post, author=author)
+        return render_template('showpost.html', title='Show Post', postid=postid, post=current_post, author=author)
     return render_template('notloggedin.html')
 
   
