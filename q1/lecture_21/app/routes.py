@@ -34,6 +34,10 @@ def editpage(postid):
                 flash('Topic has been submitted.')
                 curr_post.body = form.text_2.data
                 db.session.commit()
+                fil = postid + ".txt"
+                f = open(fil, 'w')
+                f.write(curr_post.body)  # python will convert \n to os.linesep
+                f.close()  # you can omit in most cases as the destructor will call it
                 return redirect(url_for('index'))
             else:
                 form.text_2.data = curr_post.body
