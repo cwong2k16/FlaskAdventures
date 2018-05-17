@@ -9,6 +9,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 @app.route('/')
 @app.route('/index')
 def index():
+    print("hello world")
     if current_user.is_authenticated:
         current_posts = Post.query.all()
         return render_template('index.html', title='Home', posts=current_posts, logged_in = True)

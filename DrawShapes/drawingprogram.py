@@ -17,6 +17,7 @@ def buttonPressed(evt):
       global param3
       global param4
       global width
+      print('hello world')
       param1 = e1.get()
       param2 = e2.get()
       param3 = e3.get()
